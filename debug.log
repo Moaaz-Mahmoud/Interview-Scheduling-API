@@ -1,0 +1,136 @@
+2023-12-20 15:29:35,500 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 15:29:35,500 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 15:29:35,500 - INFO:  * Restarting with stat
+2023-12-20 15:29:35,808 - WARNING:  * Debugger is active!
+2023-12-20 15:29:35,808 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 15:29:38,994 - DEBUG: <Interview (transient 140693977642224)>
+2023-12-20 15:29:39,034 - INFO: 127.0.0.1 - - [20/Dec/2023 15:29:39] "[35m[1mPOST /interviews HTTP/1.1[0m" 500 -
+2023-12-20 15:30:01,266 - DEBUG: <Interview (transient 140693959225696)>
+2023-12-20 15:30:01,300 - INFO: 127.0.0.1 - - [20/Dec/2023 15:30:01] "[35m[1mPOST /interviews HTTP/1.1[0m" 500 -
+2023-12-20 15:30:15,112 - DEBUG: <Interview (transient 140693959228096)>
+2023-12-20 15:30:15,127 - INFO: 127.0.0.1 - - [20/Dec/2023 15:30:15] "[35m[1mPOST /interviews HTTP/1.1[0m" 500 -
+2023-12-20 15:31:43,020 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 15:31:43,020 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 15:31:43,021 - INFO:  * Restarting with stat
+2023-12-20 15:31:43,317 - WARNING:  * Debugger is active!
+2023-12-20 15:31:43,317 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 15:31:45,712 - INFO: 127.0.0.1 - - [20/Dec/2023 15:31:45] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-20 15:32:45,566 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 15:32:45,566 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 15:32:45,566 - INFO:  * Restarting with stat
+2023-12-20 15:32:45,854 - WARNING:  * Debugger is active!
+2023-12-20 15:32:45,855 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 15:32:55,655 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 15:32:55,655 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 15:32:55,655 - INFO:  * Restarting with stat
+2023-12-20 15:32:55,966 - WARNING:  * Debugger is active!
+2023-12-20 15:32:55,966 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 15:33:01,601 - INFO: 127.0.0.1 - - [20/Dec/2023 15:33:01] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-20 15:33:20,536 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 15:33:20,536 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 15:33:20,536 - INFO:  * Restarting with stat
+2023-12-20 15:33:20,828 - WARNING:  * Debugger is active!
+2023-12-20 15:33:20,828 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 15:33:23,448 - INFO: 127.0.0.1 - - [20/Dec/2023 15:33:23] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-20 15:33:53,662 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 15:33:53,663 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 15:33:53,663 - INFO:  * Restarting with stat
+2023-12-20 15:33:53,952 - WARNING:  * Debugger is active!
+2023-12-20 15:33:53,952 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 15:33:56,488 - INFO: 127.0.0.1 - - [20/Dec/2023 15:33:56] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-20 15:34:20,255 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 15:34:20,255 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 15:34:20,256 - INFO:  * Restarting with stat
+2023-12-20 15:34:20,557 - WARNING:  * Debugger is active!
+2023-12-20 15:34:20,557 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 15:34:23,629 - INFO: 127.0.0.1 - - [20/Dec/2023 15:34:23] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-20 15:34:35,262 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 15:34:35,262 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 15:34:35,262 - INFO:  * Restarting with stat
+2023-12-20 15:34:35,563 - WARNING:  * Debugger is active!
+2023-12-20 15:34:35,563 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 15:34:37,509 - INFO: 127.0.0.1 - - [20/Dec/2023 15:34:37] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-20 16:05:29,267 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 16:05:29,267 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 16:05:29,267 - INFO:  * Restarting with stat
+2023-12-20 16:05:29,563 - WARNING:  * Debugger is active!
+2023-12-20 16:05:29,563 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 16:05:33,213 - INFO: 127.0.0.1 - - [20/Dec/2023 16:05:33] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-20 16:07:54,699 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 16:07:54,699 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 16:07:54,700 - INFO:  * Restarting with stat
+2023-12-20 16:07:54,979 - WARNING:  * Debugger is active!
+2023-12-20 16:07:54,979 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 16:07:59,631 - INFO: 127.0.0.1 - - [20/Dec/2023 16:07:59] "GET /interviews HTTP/1.1" 200 -
+2023-12-20 16:08:04,186 - INFO: 127.0.0.1 - - [20/Dec/2023 16:08:04] "GET /interviews/1 HTTP/1.1" 200 -
+2023-12-20 16:11:06,552 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 16:11:06,553 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 16:11:06,553 - INFO:  * Restarting with stat
+2023-12-20 16:11:06,827 - WARNING:  * Debugger is active!
+2023-12-20 16:11:06,827 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 16:11:11,415 - INFO: 127.0.0.1 - - [20/Dec/2023 16:11:11] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-20 16:11:59,622 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 16:11:59,622 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 16:11:59,623 - INFO:  * Restarting with stat
+2023-12-20 16:11:59,910 - WARNING:  * Debugger is active!
+2023-12-20 16:11:59,911 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 16:12:02,629 - INFO: 127.0.0.1 - - [20/Dec/2023 16:12:02] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-20 16:12:24,285 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 16:12:24,285 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 16:12:24,286 - INFO:  * Restarting with stat
+2023-12-20 16:12:24,573 - WARNING:  * Debugger is active!
+2023-12-20 16:12:24,574 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 16:12:27,381 - INFO: 127.0.0.1 - - [20/Dec/2023 16:12:27] "[35m[1mPOST /interviews HTTP/1.1[0m" 500 -
+2023-12-20 18:16:48,112 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 18:16:48,112 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 18:16:48,112 - INFO:  * Restarting with stat
+2023-12-20 18:16:48,402 - WARNING:  * Debugger is active!
+2023-12-20 18:16:48,403 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 18:16:55,321 - INFO: 127.0.0.1 - - [20/Dec/2023 18:16:55] "[31m[1mPUT /interviews/1 HTTP/1.1[0m" 400 -
+2023-12-20 18:16:59,505 - INFO: 127.0.0.1 - - [20/Dec/2023 18:16:59] "[31m[1mPUT /interviews/1 HTTP/1.1[0m" 400 -
+2023-12-20 18:17:14,996 - INFO: 127.0.0.1 - - [20/Dec/2023 18:17:14] "[31m[1mPUT /interviews/1 HTTP/1.1[0m" 400 -
+2023-12-20 18:17:26,871 - INFO: 127.0.0.1 - - [20/Dec/2023 18:17:26] "[31m[1mPUT /interviews/1 HTTP/1.1[0m" 400 -
+2023-12-20 18:17:50,397 - INFO: 127.0.0.1 - - [20/Dec/2023 18:17:50] "[31m[1mPUT /interviews/1 HTTP/1.1[0m" 400 -
+2023-12-20 18:18:03,318 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 18:18:03,318 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 18:18:03,319 - INFO:  * Restarting with stat
+2023-12-20 18:18:03,592 - WARNING:  * Debugger is active!
+2023-12-20 18:18:03,592 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 18:18:10,478 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 18:18:10,478 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 18:18:10,479 - INFO:  * Restarting with stat
+2023-12-20 18:18:10,750 - WARNING:  * Debugger is active!
+2023-12-20 18:18:10,751 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 18:18:14,765 - INFO: 127.0.0.1 - - [20/Dec/2023 18:18:14] "[31m[1mPUT /interviews/1 HTTP/1.1[0m" 400 -
+2023-12-20 18:18:39,381 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 18:18:39,381 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 18:18:39,382 - INFO:  * Restarting with stat
+2023-12-20 18:18:39,660 - WARNING:  * Debugger is active!
+2023-12-20 18:18:39,661 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 18:18:41,627 - INFO: 127.0.0.1 - - [20/Dec/2023 18:18:41] "[31m[1mPUT /interviews/1 HTTP/1.1[0m" 400 -
+2023-12-20 18:26:03,115 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-20 18:26:03,115 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-20 18:26:03,116 - INFO:  * Restarting with stat
+2023-12-20 18:26:03,388 - WARNING:  * Debugger is active!
+2023-12-20 18:26:03,388 - INFO:  * Debugger PIN: 120-622-976
+2023-12-20 18:26:08,181 - INFO: 127.0.0.1 - - [20/Dec/2023 18:26:08] "[31m[1mPUT /interviews/1 HTTP/1.1[0m" 400 -
+2023-12-20 18:26:13,157 - INFO: 127.0.0.1 - - [20/Dec/2023 18:26:13] "[31m[1mPUT /interviews/1 HTTP/1.1[0m" 415 -
+2023-12-20 18:26:23,681 - INFO: 127.0.0.1 - - [20/Dec/2023 18:26:23] "[31m[1mPUT /interviews/1 HTTP/1.1[0m" 400 -

@@ -1,14 +1,29 @@
+import logging
 from flask_restful import Resource, reqparse
+from enum import Enum
+
 from app import api, db
-from app.models import Interview
+from app.models import Interview, InterviewStatus
 from datetime import datetime
+import config
+
+datetime_format = '%Y-%m-%dT%H:%M:%S.%f'
 
 
 parser = reqparse.RequestParser()
 parser.add_argument('interviewee_name', type=str, required=True, help='Name of the interviewee')
 parser.add_argument('interviewer_name', type=str, required=True, help='Name of the interviewer')
-parser.add_argument('interview_datetime', type=str, required=True, help='Datetime of the interview (YYYY-MM-DD HH:MM:SS)')
-parser.add_argument('interview_duration_min', type=str, required=True, help='Duration of the interview')
+parser.add_argument('interview_datetime', type=str, required=True,
+                    help='Datetime of the interview (YYYY-MM-DD HH:MM:SS)')
+parser.add_argument('interview_duration_min', type=int, required=True, help='Duration of the interview')
+parser.add_argument('status',
+                    # type=db.Enum(InterviewStatus, values_callable=lambda x: [str(status.value)
+                    #                                                          for status in InterviewStatus]),
+                    type=str,
+                    required=False,
+                    help='Status of the interview [SCHEDULED, ONGOING, CANCELED, COMPLETED]')
+parser.add_argument('created_at', type=str, required=False, help='Creation datetime of the record')
+parser.add_argument('updated_at', type=str, required=False, help='Last update datetime of the record')
 
 
 class InterviewResource(Resource):
@@ -20,24 +35,38 @@ class InterviewResource(Resource):
             'interviewer_name': interview.interviewer_name,
             'interview_datetime': interview.interview_datetime.isoformat(),
             'interview_duration_min': interview.interview_duration_min,
-            'status': interview.status,
+            'status': interview.status.serialize(),
             'created_at': interview.created_at.isoformat(),
             'updated_at': interview.updated_at.isoformat()
         }
 
     def put(self, interview_id):
         args = parser.parse_args()
-        interview = Interview.query.get_or_404(interview_id)
+        raise 'aa'
+        # interview = Interview.query.get_or_404(interview_id)
 
-        interview.interviewee_name = args['interviewee_name']
-        interview.interviewer_name = args['interviewer_name']
-        interview.interview_datetime = datetime.strptime(args['interview_datetime'], '%Y-%m-%d %H:%M:%S')
-        interview.interview_duration_min = args['interview_duration_min']
-        interview.status = args['status']
+        # interview.interviewee_name = args.get('interviewee_name', interview.interviewee_name)
+        # interview.interviewer_name = args.get('interviewer_name', interview.interviewer_name)
+        # interview.interview_datetime = datetime.strptime(
+        #     args.get('interview_datetime', interview.interview_datetime.strftime(datetime_format)),
+        #     datetime_format
+        # )
+        # interview.interview_duration_min = args.get('interview_duration_min', interview.interview_duration_min)
+
+        # status = InterviewStatus(args.get('status', interview.status.serialize()))
+        # interview.status = status
+        # provided_status = args.get('status')
+        # try:
+        #     status_enum = InterviewStatus(provided_status) if provided_status else interview.status
+        # except ValueError as e:
+        #     logging.error(f"Error converting status: {e}")
+        #     return {'error': 'Invalid status provided'}, 400
+
+        # interview.status = status_enum
 
         interview.updated_at = datetime.utcnow()
-
         db.session.commit()
+
         return {'message': 'Interview updated successfully'}
 
     def delete(self, interview_id):
@@ -53,10 +82,10 @@ class InterviewListResource(Resource):
         return [
             {
                 'interviewee_name': interview.interviewee_name,
-                'interview_date': interview.interview_date,
+                'interviewer_name': interview.interviewer_name,
                 'interview_datetime': interview.interview_datetime.isoformat(),
                 'interview_duration_min': interview.interview_duration_min,
-                'status': interview.status,
+                'status': interview.status.serialize(),
                 'created_at': interview.created_at.isoformat(),
                 'updated_at': interview.updated_at.isoformat()
             } for interview in interviews
@@ -64,15 +93,25 @@ class InterviewListResource(Resource):
 
     def post(self):
         args = parser.parse_args()
+
+        status = args.get('status', InterviewStatus.SCHEDULED.serialize())
+        created_at = args.get('created_at', datetime.utcnow().isoformat())
+        created_at = created_at if created_at is not None else datetime.utcnow().isoformat()
+        updated_at = args.get('updated_at', datetime.utcnow().isoformat())
+        updated_at = updated_at if updated_at is not None else datetime.utcnow().isoformat()
+
         interview = Interview(interviewee_name=args['interviewee_name'],
-                              interview_datetime=args['interview_date'],
+                              interview_datetime=datetime.strptime(args['interview_datetime'], datetime_format),
                               interviewer_name=args['interviewer_name'],
                               interview_duration_min=args['interview_duration_min'],
-                              status=args['status'],
-                              created_at=args['created_at'],
-                              updated_at=args['updated_at'],)
+                              status=status,
+                              created_at=datetime.strptime(created_at, datetime_format),
+                              updated_at=datetime.strptime(updated_at, datetime_format)
+                              )
+
         db.session.add(interview)
         db.session.commit()
+
         return {'message': 'Interview created successfully'}
 
 

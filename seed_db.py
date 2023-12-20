@@ -1,9 +1,9 @@
 import datetime
-
 from app import app, db
 from app.models import Interview, InterviewStatus
 
-datetime_format = '%Y-%m-%d'
+
+datetime_format = '%Y-%m-%dT%H:%M:%S.%f'
 
 
 with app.app_context():
@@ -13,7 +13,7 @@ with app.app_context():
             interviewer_name='Cat Meows',
             interview_datetime=datetime.datetime.strptime('2024-01-01', datetime_format),
             interview_duration_min=60,
-            status=InterviewStatus.SCHEDULED,
+            status=InterviewStatus.SCHEDULED.serialize(),
             created_at=datetime.datetime.strptime('2023-12-01', datetime_format),
             updated_at=datetime.datetime.strptime('2023-12-19', datetime_format)
         ),
@@ -22,7 +22,7 @@ with app.app_context():
             interviewer_name='Horse Meows',
             interview_datetime=datetime.datetime.strptime('2024-01-02', datetime_format),
             interview_duration_min=45,
-            status=InterviewStatus.SCHEDULED,
+            status=InterviewStatus.SCHEDULED.serialize(),
             created_at=datetime.datetime.strptime('2023-12-2', datetime_format),
             updated_at=datetime.datetime.strptime('2023-12-18', datetime_format)
         ),
