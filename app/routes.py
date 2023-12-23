@@ -9,13 +9,12 @@ import config
 
 datetime_format = '%Y-%m-%dT%H:%M:%S.%f'
 
-
 parser = reqparse.RequestParser()
-parser.add_argument('interviewee_name', type=str, required=True, help='Name of the interviewee')
-parser.add_argument('interviewer_name', type=str, required=True, help='Name of the interviewer')
-parser.add_argument('interview_datetime', type=str, required=True,
+parser.add_argument('interviewee_name', type=str, required=False, help='Name of the interviewee')
+parser.add_argument('interviewer_name', type=str, required=False, help='Name of the interviewer')
+parser.add_argument('interview_datetime', type=str, required=False,
                     help='Datetime of the interview (YYYY-MM-DD HH:MM:SS)')
-parser.add_argument('interview_duration_min', type=int, required=True, help='Duration of the interview')
+parser.add_argument('interview_duration_min', type=int, required=False, help='Duration of the interview')
 parser.add_argument('status',
                     # type=db.Enum(InterviewStatus, values_callable=lambda x: [str(status.value)
                     #                                                          for status in InterviewStatus]),
@@ -41,30 +40,26 @@ class InterviewResource(Resource):
         }
 
     def put(self, interview_id):
-        args = parser.parse_args()
-        raise 'aa'
-        # interview = Interview.query.get_or_404(interview_id)
+        interview = Interview.query.get_or_404(interview_id)
+        args = parser.parse_args(strict=False)
 
-        # interview.interviewee_name = args.get('interviewee_name', interview.interviewee_name)
-        # interview.interviewer_name = args.get('interviewer_name', interview.interviewer_name)
-        # interview.interview_datetime = datetime.strptime(
-        #     args.get('interview_datetime', interview.interview_datetime.strftime(datetime_format)),
-        #     datetime_format
-        # )
-        # interview.interview_duration_min = args.get('interview_duration_min', interview.interview_duration_min)
+        if args['interviewee_name']:
+            interview.interviewee_name = args['interviewee_name']
 
-        # status = InterviewStatus(args.get('status', interview.status.serialize()))
-        # interview.status = status
-        # provided_status = args.get('status')
-        # try:
-        #     status_enum = InterviewStatus(provided_status) if provided_status else interview.status
-        # except ValueError as e:
-        #     logging.error(f"Error converting status: {e}")
-        #     return {'error': 'Invalid status provided'}, 400
+        if args['interviewer_name']:
+            interview.interviewer_name = args['interviewer_name']
 
-        # interview.status = status_enum
+        if args['interview_datetime']:
+            interview.interview_datetime = datetime.strptime(args['interview_datetime'], datetime_format)
+
+        if args['interview_duration_min']:
+            interview.interview_duration_min = args['interview_duration_min']
+
+        if args.get('status', interview.status.serialize()):
+            interview.status = args.get('status', interview.status.serialize())
 
         interview.updated_at = datetime.utcnow()
+
         db.session.commit()
 
         return {'message': 'Interview updated successfully'}
