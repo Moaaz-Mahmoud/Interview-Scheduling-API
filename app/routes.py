@@ -59,17 +59,39 @@ class InterviewResource(Resource):
             interview.interviewer_name = args['interviewer_name']
 
         if args['interview_datetime']:
-            interview.interview_datetime = datetime.strptime(args['interview_datetime'], DATETIME_FORMAT)
+            # Validate interview_datetime
+            interview_datetime_raw = args['interview_datetime']
+            try:
+                interview.interview_datetime = datetime.strptime(interview_datetime_raw, DATETIME_FORMAT)
+            except ValueError as e:
+                return {'message': 'Error parsing interview_datetime'}, 400  # Bad request
+            except Exception as e:
+                logging.error(f'Error parsing interview_datetime (generic exception): {str(e)}')
+                return {'message': 'Error parsing interview_datetime'}, 400  # Bad request
 
         if args['interview_duration_min']:
-            interview.interview_duration_min = args['interview_duration_min']
+            # Validate interview_duration_min
+            try:
+                interview.interview_duration_min = int(args['interview_duration_min'])
+            except ValueError as e:
+                return {'message': 'Invalid integer for interview_duration_min'}, 400  # Bad request
 
         if args.get('status', interview.status.serialize()):
-            interview.status = args.get('status', interview.status.serialize())
+            # Validate status
+            status = args.get('status', InterviewStatus.SCHEDULED.serialize())
+            if not InterviewStatus.validate_str(status):
+                return {'message': 'Unable to serialize status'}, 400  # Bad request
+            interview.status = status
 
         interview.updated_at = datetime.utcnow()
 
-        db.session.commit()
+        try:
+            db.session.commit()
+        except DatabaseError as e:
+            return {'message': f'Error adding entry to the database: {str(e)}'}, 500  # Internal server error
+        except Exception as e:
+            logging.error(f'Error adding entry to the database (generic exception): {str(e)}')
+            return {'message': f'Unexpected error adding entry to the database'}, 500  # Internal server error
 
         return {'message': 'Interview updated successfully'}, 200
 
