@@ -40,7 +40,7 @@ class InterviewResource(Resource):
                 'updated_at': interview.updated_at.isoformat()
             }, 200
         except NotFound as e:
-            logging.error(f'404 error: str{e}')
+            logging.error(f'Entry not found. ERROR: str{e}')
             return {'message': 'Interview not found'}, 404  # Not found
         except ValueError as e:
             return {'message': f'Serialization error: {str(e)}'}, 500  # Internal server error
@@ -74,9 +74,26 @@ class InterviewResource(Resource):
         return {'message': 'Interview updated successfully'}, 200
 
     def delete(self, interview_id):
-        interview = Interview.query.get_or_404(interview_id)
-        db.session.delete(interview)
-        db.session.commit()
+        try:
+            interview = Interview.query.get_or_404(interview_id)
+        except NotFound as e:
+            logging.error(f'Entry not found. ERROR: str{e}')
+            return {'message': 'Interview not found'}, 404  # Not found
+        except ValueError as e:
+            return {'message': f'Serialization error: {str(e)}'}, 500  # Internal server error
+        except Exception as e:
+            logging.error(f'Unexpected error in get interview (generic exception): {str(e)}')
+            return {'message': 'An unexpected error occurred'}, 500  # Internal server error
+
+        try:
+            db.session.delete(interview)
+            db.session.commit()
+        except DatabaseError as e:
+            return {'message': f'Error adding entry to the database: {str(e)}'}, 500  # Internal server error
+        except Exception as e:
+            logging.error(f'Error adding entry to the database (generic exception): {str(e)}')
+            return {'message': f'Unexpected error adding entry to the database'}, 500  # Internal server error
+
         return {'message': 'Interview deleted successfully'}, 200
 
 
