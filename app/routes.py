@@ -1,16 +1,15 @@
 import logging
 from flask_restful import Resource, reqparse
-from enum import Enum
+from sqlalchemy.exc import DatabaseError
 
 from werkzeug.exceptions import NotFound
 
 from app import api, db
 from app.models import Interview, InterviewStatus
 from datetime import datetime
-import config
 
 
-datetime_format = '%Y-%m-%dT%H:%M:%S.%f'
+DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
 
 parser = reqparse.RequestParser()
 parser.add_argument('interviewee_name', type=str, required=False, help='Name of the interviewee')
@@ -19,8 +18,6 @@ parser.add_argument('interview_datetime', type=str, required=False,
                     help='Datetime of the interview (YYYY-MM-DD HH:MM:SS)')
 parser.add_argument('interview_duration_min', type=int, required=False, help='Duration of the interview')
 parser.add_argument('status',
-                    # type=db.Enum(InterviewStatus, values_callable=lambda x: [str(status.value)
-                    #                                                          for status in InterviewStatus]),
                     type=str,
                     required=False,
                     help='Status of the interview [SCHEDULED, ONGOING, CANCELED, COMPLETED]')
@@ -41,38 +38,15 @@ class InterviewResource(Resource):
                 'status': interview.status.serialize(),
                 'created_at': interview.created_at.isoformat(),
                 'updated_at': interview.updated_at.isoformat()
-            }
+            }, 200
         except NotFound as e:
             logging.error(f'404 error: str{e}')
-            return {'message': 'Interview not found'}, 404
+            return {'message': 'Interview not found'}, 404  # Not found
         except ValueError as e:
-            return {'message': f'Serialization error: {str(e)}'}, 500
+            return {'message': f'Serialization error: {str(e)}'}, 500  # Internal server error
         except Exception as e:
             logging.error(f'Unexpected error in get interview: {str(e)}')
-            return {'message': 'An unexpected error occurred'}, 500
-
-    def post(self):
-        args = parser.parse_args()
-
-        status = args.get('status', InterviewStatus.SCHEDULED.serialize())
-        created_at = args.get('created_at', datetime.utcnow().isoformat())
-        created_at = created_at if created_at is not None else datetime.utcnow().isoformat()
-        updated_at = args.get('updated_at', datetime.utcnow().isoformat())
-        updated_at = updated_at if updated_at is not None else datetime.utcnow().isoformat()
-
-        interview = Interview(interviewee_name=args['interviewee_name'],
-                              interview_datetime=datetime.strptime(args['interview_datetime'], datetime_format),
-                              interviewer_name=args['interviewer_name'],
-                              interview_duration_min=args['interview_duration_min'],
-                              status=status,
-                              created_at=datetime.strptime(created_at, datetime_format),
-                              updated_at=datetime.strptime(updated_at, datetime_format)
-                              )
-
-        db.session.add(interview)
-        db.session.commit()
-
-        return {'message': 'Interview created successfully'}
+            return {'message': 'An unexpected error occurred'}, 500  # Internal server error
 
     def put(self, interview_id):
         interview = Interview.query.get_or_404(interview_id)
@@ -85,7 +59,7 @@ class InterviewResource(Resource):
             interview.interviewer_name = args['interviewer_name']
 
         if args['interview_datetime']:
-            interview.interview_datetime = datetime.strptime(args['interview_datetime'], datetime_format)
+            interview.interview_datetime = datetime.strptime(args['interview_datetime'], DATETIME_FORMAT)
 
         if args['interview_duration_min']:
             interview.interview_duration_min = args['interview_duration_min']
@@ -97,13 +71,13 @@ class InterviewResource(Resource):
 
         db.session.commit()
 
-        return {'message': 'Interview updated successfully'}
+        return {'message': 'Interview updated successfully'}, 200
 
     def delete(self, interview_id):
         interview = Interview.query.get_or_404(interview_id)
         db.session.delete(interview)
         db.session.commit()
-        return {'message': 'Interview deleted successfully'}
+        return {'message': 'Interview deleted successfully'}, 200
 
 
 class InterviewListResource(Resource):
@@ -119,7 +93,67 @@ class InterviewListResource(Resource):
                 'created_at': interview.created_at.isoformat(),
                 'updated_at': interview.updated_at.isoformat()
             } for interview in interviews
-        ]
+        ], 200
+
+    def post(self):
+        args = parser.parse_args()
+
+        # Add optional parameters defaults to `args` if needed
+        created_at = args.get('created_at', datetime.utcnow().isoformat())
+        created_at = created_at if created_at is not None else datetime.utcnow().isoformat()
+        args['created_at'] = created_at
+
+        updated_at = args.get('updated_at', datetime.utcnow().isoformat())
+        updated_at = updated_at if updated_at is not None else datetime.utcnow().isoformat()
+        args['updated_at'] = updated_at
+
+        # Handle missing parameters
+        if None in args.values():
+            return {
+                'message': 'Missing parameters',
+                'missing parameters': [argument for argument in args.keys() if args[argument] is None]
+            }, 400  # Bad request
+
+        # Validate interview_datetime
+        interview_datetime = args['interview_datetime']
+        try:
+            interview_datetime = datetime.strptime(interview_datetime, DATETIME_FORMAT)
+        except ValueError as e:
+            return {'message': 'Error parsing interview_datetime'}, 400  # Bad request
+        except Exception as e:
+            logging.error(f'Error parsing interview_datetime (generic exception): {str(e)}')
+            return {'message': 'Error parsing interview_datetime'}, 400  # Bad request
+
+        # Validate interview_duration_min
+        try:
+            interview_duration_min = int(args['interview_duration_min'])
+        except ValueError as e:
+            return {'message': 'Invalid integer for interview_duration_min'}, 400  # Bad request
+
+        # Validate status
+        status = args.get('status', InterviewStatus.SCHEDULED.serialize())
+        if not InterviewStatus.validate_str(status):
+            return {'message': 'Unable to serialize status'}, 400  # Bad request
+
+        interview = Interview(interviewee_name=args['interviewee_name'],
+                              interview_datetime=interview_datetime,
+                              interviewer_name=args['interviewer_name'],
+                              interview_duration_min=interview_duration_min,
+                              status=status,
+                              created_at=datetime.strptime(created_at, DATETIME_FORMAT),
+                              updated_at=datetime.strptime(updated_at, DATETIME_FORMAT)
+                              )
+
+        try:
+            db.session.add(interview)
+            db.session.commit()
+        except DatabaseError as e:
+            return {'message': f'Error adding entry to the database: {str(e)}'}
+        except Exception as e:
+            logging.error(f'Error adding entry to the database (generic exception): {str(e)}')
+            return {'message': f'Unexpected error adding entry to the database'}
+
+        return {'message': 'Interview created successfully'}, 200
 
 
 api.add_resource(InterviewListResource, '/interviews')

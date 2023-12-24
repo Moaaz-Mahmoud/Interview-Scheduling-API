@@ -13,6 +13,10 @@ class InterviewStatus(Enum):
     def serialize(self):
         return str(self.value)
 
+    @classmethod
+    def validate_str(cls, status: str):
+        return status.upper() in InterviewStatus.__members__.keys()
+
 
 class Interview(db.Model):
     __tablename__ = 'interviews'

@@ -141,3 +141,159 @@
 2023-12-24 06:11:38,071 - WARNING:  * Debugger is active!
 2023-12-24 06:11:38,071 - INFO:  * Debugger PIN: 127-690-862
 2023-12-24 06:11:42,076 - INFO: 127.0.0.1 - - [24/Dec/2023 06:11:42] "[33mGET /interviews/3 HTTP/1.1[0m" 404 -
+2023-12-24 06:51:44,688 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 06:51:44,688 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 06:51:44,688 - INFO:  * Restarting with stat
+2023-12-24 06:51:44,968 - WARNING:  * Debugger is active!
+2023-12-24 06:51:44,969 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 06:51:48,446 - INFO: 127.0.0.1 - - [24/Dec/2023 06:51:48] "[35m[1mPOST /interviews/3?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1[0m" 500 -
+2023-12-24 06:51:58,429 - INFO: 127.0.0.1 - - [24/Dec/2023 06:51:58] "[31m[1mPOST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1[0m" 405 -
+2023-12-24 06:53:02,317 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 06:53:02,317 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 06:53:02,317 - INFO:  * Restarting with stat
+2023-12-24 06:53:02,597 - WARNING:  * Debugger is active!
+2023-12-24 06:53:02,597 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 06:53:07,343 - INFO: 127.0.0.1 - - [24/Dec/2023 06:53:07] "[31m[1mPOST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1[0m" 405 -
+2023-12-24 06:53:39,863 - INFO: 127.0.0.1 - - [24/Dec/2023 06:53:39] "[35m[1mPOST /interviews/1?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1[0m" 500 -
+2023-12-24 06:54:07,229 - INFO: 127.0.0.1 - - [24/Dec/2023 06:54:07] "GET /interviews/1?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1" 200 -
+2023-12-24 06:54:40,870 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 06:54:40,871 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 06:54:40,871 - INFO:  * Restarting with stat
+2023-12-24 06:54:41,149 - WARNING:  * Debugger is active!
+2023-12-24 06:54:41,149 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 06:55:28,312 - INFO: 127.0.0.1 - - [24/Dec/2023 06:55:28] "[31m[1mPOST /interviews HTTP/1.1[0m" 405 -
+2023-12-24 06:57:05,435 - INFO: 127.0.0.1 - - [24/Dec/2023 06:57:05] "[35m[1mPOST /interviews/1?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1[0m" 500 -
+2023-12-24 06:57:28,266 - INFO: 127.0.0.1 - - [24/Dec/2023 06:57:28] "[31m[1mPOST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1[0m" 405 -
+2023-12-24 06:57:33,542 - INFO: 127.0.0.1 - - [24/Dec/2023 06:57:33] "[31m[1mPOST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1[0m" 405 -
+2023-12-24 06:57:39,852 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 06:57:39,852 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 06:57:39,852 - INFO:  * Restarting with stat
+2023-12-24 06:57:40,127 - WARNING:  * Debugger is active!
+2023-12-24 06:57:40,127 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 06:57:41,941 - INFO: 127.0.0.1 - - [24/Dec/2023 06:57:41] "[31m[1mPOST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1[0m" 405 -
+2023-12-24 06:57:43,884 - INFO: 127.0.0.1 - - [24/Dec/2023 06:57:43] "[31m[1mPOST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1[0m" 405 -
+2023-12-24 06:59:49,120 - INFO: 127.0.0.1 - - [24/Dec/2023 06:59:49] "[33mPOST /interviews/ HTTP/1.1[0m" 404 -
+2023-12-24 07:00:19,293 - INFO: 127.0.0.1 - - [24/Dec/2023 07:00:19] "[33mPOST /interviews/ HTTP/1.1[0m" 404 -
+2023-12-24 07:00:30,762 - INFO: 127.0.0.1 - - [24/Dec/2023 07:00:30] "[31m[1mPOST /interviews HTTP/1.1[0m" 405 -
+2023-12-24 07:03:53,591 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:03:53,592 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:03:53,592 - INFO:  * Restarting with stat
+2023-12-24 07:03:53,896 - WARNING:  * Debugger is active!
+2023-12-24 07:03:53,897 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:04:01,054 - INFO: 127.0.0.1 - - [24/Dec/2023 07:04:01] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-24 07:04:33,322 - INFO:  * Detected change in '/home/moaaz/Backend-Projects/interview-scheduling-api/app/routes.py', reloading
+2023-12-24 07:04:33,403 - INFO:  * Restarting with stat
+2023-12-24 07:04:33,684 - WARNING:  * Debugger is active!
+2023-12-24 07:04:33,684 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:04:34,404 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:04:34,404 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:04:34,404 - INFO:  * Restarting with stat
+2023-12-24 07:04:34,703 - WARNING:  * Debugger is active!
+2023-12-24 07:04:34,703 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:04:37,808 - INFO: 127.0.0.1 - - [24/Dec/2023 07:04:37] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-24 07:05:14,174 - INFO:  * Detected change in '/home/moaaz/Backend-Projects/interview-scheduling-api/app/routes.py', reloading
+2023-12-24 07:05:14,248 - INFO:  * Restarting with stat
+2023-12-24 07:05:14,518 - WARNING:  * Debugger is active!
+2023-12-24 07:05:14,519 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:05:15,257 - INFO: 127.0.0.1 - - [24/Dec/2023 07:05:15] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-24 07:05:43,113 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:05:43,113 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:05:43,113 - INFO:  * Restarting with stat
+2023-12-24 07:05:43,397 - WARNING:  * Debugger is active!
+2023-12-24 07:05:43,398 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:05:47,011 - INFO: 127.0.0.1 - - [24/Dec/2023 07:05:47] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-24 07:06:18,695 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:06:18,695 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:06:18,695 - INFO:  * Restarting with stat
+2023-12-24 07:06:18,977 - WARNING:  * Debugger is active!
+2023-12-24 07:06:18,977 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:06:22,563 - INFO: 127.0.0.1 - - [24/Dec/2023 07:06:22] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-24 07:06:33,667 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:06:33,667 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:06:33,668 - INFO:  * Restarting with stat
+2023-12-24 07:06:33,942 - WARNING:  * Debugger is active!
+2023-12-24 07:06:33,943 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:06:37,531 - INFO: 127.0.0.1 - - [24/Dec/2023 07:06:37] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-24 07:06:55,163 - INFO: 127.0.0.1 - - [24/Dec/2023 07:06:55] "[35m[1mPOST /interviews HTTP/1.1[0m" 500 -
+2023-12-24 07:07:15,558 - INFO: 127.0.0.1 - - [24/Dec/2023 07:07:15] "[35m[1mPOST /interviews HTTP/1.1[0m" 500 -
+2023-12-24 07:07:31,250 - INFO: 127.0.0.1 - - [24/Dec/2023 07:07:31] "POST /interviews HTTP/1.1" 200 -
+2023-12-24 07:08:14,742 - INFO: 127.0.0.1 - - [24/Dec/2023 07:08:14] "POST /interviews HTTP/1.1" 200 -
+2023-12-24 07:13:02,926 - INFO: 127.0.0.1 - - [24/Dec/2023 07:13:02] "[31m[1mPOST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULEDOOOOOOOOOOOOOOOOOOO HTTP/1.1[0m" 400 -
+2023-12-24 07:25:33,833 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:25:33,833 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:25:33,835 - INFO:  * Restarting with stat
+2023-12-24 07:25:34,121 - WARNING:  * Debugger is active!
+2023-12-24 07:25:34,121 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:25:46,490 - INFO: 127.0.0.1 - - [24/Dec/2023 07:25:46] "POST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1" 200 -
+2023-12-24 07:26:12,088 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:26:12,088 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:26:12,088 - INFO:  * Restarting with stat
+2023-12-24 07:26:12,368 - WARNING:  * Debugger is active!
+2023-12-24 07:26:12,369 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:26:15,071 - INFO: 127.0.0.1 - - [24/Dec/2023 07:26:15] "POST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1" 200 -
+2023-12-24 07:26:44,213 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:26:44,213 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:26:44,213 - INFO:  * Restarting with stat
+2023-12-24 07:26:44,559 - WARNING:  * Debugger is active!
+2023-12-24 07:26:44,559 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:26:46,101 - INFO: 127.0.0.1 - - [24/Dec/2023 07:26:46] "POST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1" 200 -
+2023-12-24 07:26:48,198 - INFO: 127.0.0.1 - - [24/Dec/2023 07:26:48] "POST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1" 200 -
+2023-12-24 07:28:12,489 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:28:12,489 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:28:12,490 - INFO:  * Restarting with stat
+2023-12-24 07:28:12,855 - WARNING:  * Debugger is active!
+2023-12-24 07:28:12,855 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:28:14,434 - INFO: 127.0.0.1 - - [24/Dec/2023 07:28:14] "POST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_duration_min=45&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1" 200 -
+2023-12-24 07:29:01,475 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:29:01,475 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:29:01,476 - INFO:  * Restarting with stat
+2023-12-24 07:29:01,755 - WARNING:  * Debugger is active!
+2023-12-24 07:29:01,755 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:29:03,610 - INFO: 127.0.0.1 - - [24/Dec/2023 07:29:03] "POST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1" 200 -
+2023-12-24 07:29:38,701 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:29:38,701 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:29:38,702 - INFO:  * Restarting with stat
+2023-12-24 07:29:38,989 - WARNING:  * Debugger is active!
+2023-12-24 07:29:38,990 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:29:40,465 - INFO: 127.0.0.1 - - [24/Dec/2023 07:29:40] "POST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1" 200 -
+2023-12-24 07:33:33,529 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:33:33,529 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:33:33,529 - INFO:  * Restarting with stat
+2023-12-24 07:33:33,808 - WARNING:  * Debugger is active!
+2023-12-24 07:33:33,808 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:33:35,672 - INFO: 127.0.0.1 - - [24/Dec/2023 07:33:35] "POST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&interview_datetime=2024-12-02T0:0:0.0&status=SCHEDULED HTTP/1.1" 200 -
+2023-12-24 07:33:46,691 - INFO: 127.0.0.1 - - [24/Dec/2023 07:33:46] "POST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&status=SCHEDULED HTTP/1.1" 200 -
+2023-12-24 07:34:22,629 - INFO: 127.0.0.1 - - [24/Dec/2023 07:34:22] "[31m[1mPOST /interviews HTTP/1.1[0m" 400 -
+2023-12-24 07:34:49,737 - INFO: 127.0.0.1 - - [24/Dec/2023 07:34:49] "POST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&status=SCHEDULED HTTP/1.1" 200 -
+2023-12-24 07:35:05,749 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:35:05,749 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:35:05,750 - INFO:  * Restarting with stat
+2023-12-24 07:35:06,042 - WARNING:  * Debugger is active!
+2023-12-24 07:35:06,043 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:35:07,660 - INFO: 127.0.0.1 - - [24/Dec/2023 07:35:07] "POST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&status=SCHEDULED HTTP/1.1" 200 -
+2023-12-24 07:36:00,597 - INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-12-24 07:36:00,597 - INFO: [33mPress CTRL+C to quit[0m
+2023-12-24 07:36:00,598 - INFO:  * Restarting with stat
+2023-12-24 07:36:00,875 - WARNING:  * Debugger is active!
+2023-12-24 07:36:00,876 - INFO:  * Debugger PIN: 127-690-862
+2023-12-24 07:36:03,306 - INFO: 127.0.0.1 - - [24/Dec/2023 07:36:03] "POST /interviews?interviewee_name=Meowie&interviewer_name=eiwoe%20MtaC&status=SCHEDULED HTTP/1.1" 200 -
+2023-12-24 07:43:14,065 - INFO:  * Detected change in '/home/moaaz/Backend-Projects/interview-scheduling-api/app/routes.py', reloading
+2023-12-24 07:43:14,151 - INFO:  * Restarting with stat
