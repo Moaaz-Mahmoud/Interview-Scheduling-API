@@ -43,4 +43,3 @@ class Interview(db.Model):
         if int(value) <= 0:
             raise ValueError("Interview duration must be greater than 0.")
         return value
-

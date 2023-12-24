@@ -4,7 +4,7 @@ from sqlalchemy.exc import DatabaseError
 
 from werkzeug.exceptions import NotFound
 
-from app import api, db
+from app import db
 from app.models import Interview, InterviewStatus
 from datetime import datetime
 

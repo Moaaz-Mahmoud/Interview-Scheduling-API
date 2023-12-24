@@ -1,7 +1,7 @@
-import os
 import logging
 
 logging.basicConfig(filename='debug.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s: %(message)s')
+
 
 class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
