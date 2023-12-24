@@ -45,7 +45,7 @@ class InterviewResource(Resource):
         except ValueError as e:
             return {'message': f'Serialization error: {str(e)}'}, 500  # Internal server error
         except Exception as e:
-            logging.error(f'Unexpected error in get interview: {str(e)}')
+            logging.error(f'Unexpected error in get interview (generic exception): {str(e)}')
             return {'message': 'An unexpected error occurred'}, 500  # Internal server error
 
     def put(self, interview_id):
@@ -82,18 +82,27 @@ class InterviewResource(Resource):
 
 class InterviewListResource(Resource):
     def get(self):
-        interviews = Interview.query.all()
-        return [
-            {
-                'interviewee_name': interview.interviewee_name,
-                'interviewer_name': interview.interviewer_name,
-                'interview_datetime': interview.interview_datetime.isoformat(),
-                'interview_duration_min': interview.interview_duration_min,
-                'status': interview.status.serialize(),
-                'created_at': interview.created_at.isoformat(),
-                'updated_at': interview.updated_at.isoformat()
-            } for interview in interviews
-        ], 200
+        try:
+            interviews = Interview.query.all()
+            return [
+                {
+                    'interviewee_name': interview.interviewee_name,
+                    'interviewer_name': interview.interviewer_name,
+                    'interview_datetime': interview.interview_datetime.isoformat(),
+                    'interview_duration_min': interview.interview_duration_min,
+                    'status': interview.status.serialize(),
+                    'created_at': interview.created_at.isoformat(),
+                    'updated_at': interview.updated_at.isoformat()
+                } for interview in interviews
+            ], 200
+        except NotFound as e:
+            logging.error(f'404 error: str{e}')
+            return {'message': 'Error retrieving interview data'}, 404  # Not found
+        except ValueError as e:
+            return {'message': f'Serialization error: {str(e)}'}, 500  # Internal server error
+        except Exception as e:
+            logging.error(f'Unexpected error in get interview (generic exception): {str(e)}')
+            return {'message': 'An unexpected error occurred'}, 500  # Internal server error
 
     def post(self):
         args = parser.parse_args()
@@ -148,10 +157,10 @@ class InterviewListResource(Resource):
             db.session.add(interview)
             db.session.commit()
         except DatabaseError as e:
-            return {'message': f'Error adding entry to the database: {str(e)}'}
+            return {'message': f'Error adding entry to the database: {str(e)}'}, 500  # Internal server error
         except Exception as e:
             logging.error(f'Error adding entry to the database (generic exception): {str(e)}')
-            return {'message': f'Unexpected error adding entry to the database'}
+            return {'message': f'Unexpected error adding entry to the database'}, 500  # Internal server error
 
         return {'message': 'Interview created successfully'}, 200
 
