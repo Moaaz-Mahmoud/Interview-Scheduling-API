@@ -2,10 +2,13 @@ import logging
 from flask_restful import Resource, reqparse
 from enum import Enum
 
+from werkzeug.exceptions import NotFound
+
 from app import api, db
 from app.models import Interview, InterviewStatus
 from datetime import datetime
 import config
+
 
 datetime_format = '%Y-%m-%dT%H:%M:%S.%f'
 
@@ -27,17 +30,49 @@ parser.add_argument('updated_at', type=str, required=False, help='Last update da
 
 class InterviewResource(Resource):
     def get(self, interview_id):
-        interview = Interview.query.get_or_404(interview_id)
-        return {
-            'id': interview.id,
-            'interviewee_name': interview.interviewee_name,
-            'interviewer_name': interview.interviewer_name,
-            'interview_datetime': interview.interview_datetime.isoformat(),
-            'interview_duration_min': interview.interview_duration_min,
-            'status': interview.status.serialize(),
-            'created_at': interview.created_at.isoformat(),
-            'updated_at': interview.updated_at.isoformat()
-        }
+        try:
+            interview = Interview.query.get_or_404(interview_id)
+            return {
+                'id': interview.id,
+                'interviewee_name': interview.interviewee_name,
+                'interviewer_name': interview.interviewer_name,
+                'interview_datetime': interview.interview_datetime.isoformat(),
+                'interview_duration_min': interview.interview_duration_min,
+                'status': interview.status.serialize(),
+                'created_at': interview.created_at.isoformat(),
+                'updated_at': interview.updated_at.isoformat()
+            }
+        except NotFound as e:
+            logging.error(f'404 error: str{e}')
+            return {'message': 'Interview not found'}, 404
+        except ValueError as e:
+            return {'message': f'Serialization error: {str(e)}'}, 500
+        except Exception as e:
+            logging.error(f'Unexpected error in get interview: {str(e)}')
+            return {'message': 'An unexpected error occurred'}, 500
+
+    def post(self):
+        args = parser.parse_args()
+
+        status = args.get('status', InterviewStatus.SCHEDULED.serialize())
+        created_at = args.get('created_at', datetime.utcnow().isoformat())
+        created_at = created_at if created_at is not None else datetime.utcnow().isoformat()
+        updated_at = args.get('updated_at', datetime.utcnow().isoformat())
+        updated_at = updated_at if updated_at is not None else datetime.utcnow().isoformat()
+
+        interview = Interview(interviewee_name=args['interviewee_name'],
+                              interview_datetime=datetime.strptime(args['interview_datetime'], datetime_format),
+                              interviewer_name=args['interviewer_name'],
+                              interview_duration_min=args['interview_duration_min'],
+                              status=status,
+                              created_at=datetime.strptime(created_at, datetime_format),
+                              updated_at=datetime.strptime(updated_at, datetime_format)
+                              )
+
+        db.session.add(interview)
+        db.session.commit()
+
+        return {'message': 'Interview created successfully'}
 
     def put(self, interview_id):
         interview = Interview.query.get_or_404(interview_id)
@@ -85,29 +120,6 @@ class InterviewListResource(Resource):
                 'updated_at': interview.updated_at.isoformat()
             } for interview in interviews
         ]
-
-    def post(self):
-        args = parser.parse_args()
-
-        status = args.get('status', InterviewStatus.SCHEDULED.serialize())
-        created_at = args.get('created_at', datetime.utcnow().isoformat())
-        created_at = created_at if created_at is not None else datetime.utcnow().isoformat()
-        updated_at = args.get('updated_at', datetime.utcnow().isoformat())
-        updated_at = updated_at if updated_at is not None else datetime.utcnow().isoformat()
-
-        interview = Interview(interviewee_name=args['interviewee_name'],
-                              interview_datetime=datetime.strptime(args['interview_datetime'], datetime_format),
-                              interviewer_name=args['interviewer_name'],
-                              interview_duration_min=args['interview_duration_min'],
-                              status=status,
-                              created_at=datetime.strptime(created_at, datetime_format),
-                              updated_at=datetime.strptime(updated_at, datetime_format)
-                              )
-
-        db.session.add(interview)
-        db.session.commit()
-
-        return {'message': 'Interview created successfully'}
 
 
 api.add_resource(InterviewListResource, '/interviews')
