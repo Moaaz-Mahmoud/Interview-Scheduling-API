@@ -1,32 +1,23 @@
-import logging
-from flask_restful import Resource, reqparse
-from sqlalchemy.exc import DatabaseError
-
+from datetime import datetime
 from werkzeug.exceptions import NotFound
+import logging
+
+from flask_restful import Resource
+from sqlalchemy.exc import DatabaseError
 
 from app import db
 from app.models import Interview, InterviewStatus
-from datetime import datetime
+from app.resources.parser import get_request_parser
 
 
 DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
 
-parser = reqparse.RequestParser()
-parser.add_argument('interviewee_name', type=str, required=False, help='Name of the interviewee')
-parser.add_argument('interviewer_name', type=str, required=False, help='Name of the interviewer')
-parser.add_argument('interview_datetime', type=str, required=False,
-                    help='Datetime of the interview (YYYY-MM-DD HH:MM:SS)')
-parser.add_argument('interview_duration_min', type=int, required=False, help='Duration of the interview')
-parser.add_argument('status',
-                    type=str,
-                    required=False,
-                    help='Status of the interview [SCHEDULED, ONGOING, CANCELED, COMPLETED]')
-parser.add_argument('created_at', type=str, required=False, help='Creation datetime of the record')
-parser.add_argument('updated_at', type=str, required=False, help='Last update datetime of the record')
+parser = get_request_parser()
 
 
 class InterviewResource(Resource):
-    def get(self, interview_id):
+    @staticmethod
+    def get(interview_id):
         try:
             interview = Interview.query.get_or_404(interview_id)
             return {
@@ -48,7 +39,8 @@ class InterviewResource(Resource):
             logging.error(f'Unexpected error in get interview (generic exception): {str(e)}')
             return {'message': 'An unexpected error occurred'}, 500  # Internal server error
 
-    def put(self, interview_id):
+    @staticmethod
+    def put(interview_id):
         interview = Interview.query.get_or_404(interview_id)
         args = parser.parse_args(strict=False)
 
@@ -63,7 +55,7 @@ class InterviewResource(Resource):
             interview_datetime_raw = args['interview_datetime']
             try:
                 interview.interview_datetime = datetime.strptime(interview_datetime_raw, DATETIME_FORMAT)
-            except ValueError as e:
+            except ValueError:
                 return {'message': 'Error parsing interview_datetime'}, 400  # Bad request
             except Exception as e:
                 logging.error(f'Error parsing interview_datetime (generic exception): {str(e)}')
@@ -75,7 +67,7 @@ class InterviewResource(Resource):
             try:
                 duration = int(args['interview_duration_min'])
                 interview.interview_duration_min = duration
-            except ValueError as e:
+            except ValueError:
                 return {'message': 'Invalid integer for interview_duration_min'}, 400  # Bad request
 
         if args.get('status', interview.status.serialize()):
@@ -97,7 +89,8 @@ class InterviewResource(Resource):
 
         return {'message': 'Interview updated successfully'}, 200
 
-    def delete(self, interview_id):
+    @staticmethod
+    def delete(interview_id):
         try:
             interview = Interview.query.get_or_404(interview_id)
         except NotFound as e:
