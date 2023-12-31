@@ -1,14 +1,12 @@
 import logging
-from flask_restful import Resource
+from flask_restful import Resource, abort
 from sqlalchemy.exc import DatabaseError
-
 from werkzeug.exceptions import NotFound
-
 from app import db
 from app.models import Interview, InterviewStatus
 from datetime import datetime
-
 from app.resources.parser import get_request_parser
+
 
 DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%f'
 
@@ -22,6 +20,7 @@ class InterviewListResource(Resource):
             interviews = Interview.query.all()
             return [
                 {
+                    'id': interview.id,
                     'interviewee_name': interview.interviewee_name,
                     'interviewer_name': interview.interviewer_name,
                     'interview_datetime': interview.interview_datetime.isoformat(),
@@ -30,15 +29,24 @@ class InterviewListResource(Resource):
                     'created_at': interview.created_at.isoformat(),
                     'updated_at': interview.updated_at.isoformat()
                 } for interview in interviews
-            ], 200
+            ]
         except NotFound as e:
             logging.error(f'404 error: str{e}')
-            return {'message': 'Error retrieving interview data'}, 404  # Not found
+            abort(
+                404,
+                message='Error retrieving interview data'
+            )
         except ValueError as e:
-            return {'message': f'Serialization error: {str(e)}'}, 500  # Internal server error
+            abort(
+                500,
+                message=f'Serialization error: {str(e)}'
+            )
         except Exception as e:
             logging.error(f'Unexpected error in get interview (generic exception): {str(e)}')
-            return {'message': 'An unexpected error occurred'}, 500  # Internal server error
+            abort(
+                500,
+                message='An unexpected error occurred'
+            )
 
     @staticmethod
     def post():
@@ -55,31 +63,44 @@ class InterviewListResource(Resource):
 
         # Handle missing parameters
         if None in args.values():
-            return {
-                'message': 'Missing parameters',
-                'missing parameters': [argument for argument in args.keys() if args[argument] is None]
-            }, 400  # Bad request
+            abort(
+                400,
+                message='Missing parameters',
+                missing_parameters=[argument for argument in args.keys() if args[argument] is None]
+            )
 
         # Validate interview_datetime
         interview_datetime = args['interview_datetime']
         try:
             interview_datetime = datetime.strptime(interview_datetime, DATETIME_FORMAT)
         except ValueError:
-            return {'message': 'Error parsing interview_datetime'}, 400  # Bad request
+            abort(
+                400,
+                message='Error parsing interview_datetime'
+            )
         except Exception as e:
             logging.error(f'Error parsing interview_datetime (generic exception): {str(e)}')
-            return {'message': 'Error parsing interview_datetime'}, 400  # Bad request
+            abort(
+                400,
+                message='Error parsing interview_datetime'
+            )
 
         # Validate interview_duration_min
         try:
             interview_duration_min = int(args['interview_duration_min'])
         except ValueError:
-            return {'message': 'Invalid integer for interview_duration_min'}, 400  # Bad request
+            abort(
+                400,
+                message='Invalid integer for interview_duration_min'
+            )
 
         # Validate status
         status = args.get('status', InterviewStatus.SCHEDULED.serialize())
         if not InterviewStatus.validate_str(status):
-            return {'message': 'Unable to serialize status'}, 400  # Bad request
+            abort(
+                400,
+                message='Unable to serialize status'
+            )
 
         interview = Interview(interviewee_name=args['interviewee_name'],
                               interview_datetime=interview_datetime,
@@ -94,9 +115,15 @@ class InterviewListResource(Resource):
             db.session.add(interview)
             db.session.commit()
         except DatabaseError as e:
-            return {'message': f'Error adding entry to the database: {str(e)}'}, 500  # Internal server error
+            abort(
+                500,
+                message=f'Error adding entry to the database: {str(e)}'
+            )
         except Exception as e:
             logging.error(f'Error adding entry to the database (generic exception): {str(e)}')
-            return {'message': f'Unexpected error adding entry to the database'}, 500  # Internal server error
+            abort(
+                500,
+                message=f'Unexpected error adding entry to the database'
+            )
 
-        return {'message': 'Interview created successfully'}, 200
+        return {'message': 'Interview created successfully'}

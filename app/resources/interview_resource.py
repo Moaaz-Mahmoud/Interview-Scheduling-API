@@ -1,10 +1,8 @@
 from datetime import datetime
 from werkzeug.exceptions import NotFound
 import logging
-
-from flask_restful import Resource
+from flask_restful import Resource, abort
 from sqlalchemy.exc import DatabaseError
-
 from app import db
 from app.models import Interview, InterviewStatus
 from app.resources.parser import get_request_parser
@@ -29,15 +27,24 @@ class InterviewResource(Resource):
                 'status': interview.status.serialize(),
                 'created_at': interview.created_at.isoformat(),
                 'updated_at': interview.updated_at.isoformat()
-            }, 200
+            }
         except NotFound as e:
             logging.error(f'Entry not found. ERROR: str{e}')
-            return {'message': 'Interview not found'}, 404  # Not found
+            abort(
+                404,
+                message='Interview not found'
+            )
         except ValueError as e:
-            return {'message': f'Serialization error: {str(e)}'}, 500  # Internal server error
+            abort(
+                500,
+                message=f'Serialization error: {str(e)}'
+            )
         except Exception as e:
             logging.error(f'Unexpected error in get interview (generic exception): {str(e)}')
-            return {'message': 'An unexpected error occurred'}, 500  # Internal server error
+            abort(
+                500,
+                message='An unexpected error occurred'
+            )
 
     @staticmethod
     def put(interview_id):
@@ -56,10 +63,16 @@ class InterviewResource(Resource):
             try:
                 interview.interview_datetime = datetime.strptime(interview_datetime_raw, DATETIME_FORMAT)
             except ValueError:
-                return {'message': 'Error parsing interview_datetime'}, 400  # Bad request
+                abort(
+                    400,
+                    message='Error parsing interview_datetime'
+                )
             except Exception as e:
                 logging.error(f'Error parsing interview_datetime (generic exception): {str(e)}')
-                return {'message': 'Error parsing interview_datetime'}, 400  # Bad request
+                abort(
+                    400,
+                    message='Error parsing interview_datetime'
+                )
 
         # TODO: Revisit the error handling for this field
         if args['interview_duration_min']:
@@ -68,13 +81,19 @@ class InterviewResource(Resource):
                 duration = int(args['interview_duration_min'])
                 interview.interview_duration_min = duration
             except ValueError:
-                return {'message': 'Invalid integer for interview_duration_min'}, 400  # Bad request
+                abort(
+                    400,
+                    message='Invalid integer for interview_duration_min'
+                )
 
         if args.get('status', interview.status.serialize()):
             # Validate status
             status = args.get('status', InterviewStatus.SCHEDULED.serialize())
             if not InterviewStatus.validate_str(status):
-                return {'message': 'Unable to serialize status'}, 400  # Bad request
+                abort(
+                    400,
+                    message='Unable to serialize status'
+                )
             interview.status = status
 
         interview.updated_at = datetime.utcnow()
@@ -82,12 +101,18 @@ class InterviewResource(Resource):
         try:
             db.session.commit()
         except DatabaseError as e:
-            return {'message': f'Error adding entry to the database: {str(e)}'}, 500  # Internal server error
+            abort(
+                500,
+                message=f'Error adding entry to the database: {str(e)}'
+            )
         except Exception as e:
             logging.error(f'Error adding entry to the database (generic exception): {str(e)}')
-            return {'message': f'Unexpected error adding entry to the database'}, 500  # Internal server error
+            abort(
+                500,
+                message=f'Unexpected error adding entry to the database'
+            )
 
-        return {'message': 'Interview updated successfully'}, 200
+        return {'message': 'Interview updated successfully'}
 
     @staticmethod
     def delete(interview_id):
@@ -95,20 +120,35 @@ class InterviewResource(Resource):
             interview = Interview.query.get_or_404(interview_id)
         except NotFound as e:
             logging.error(f'Entry not found. ERROR: str{e}')
-            return {'message': 'Interview not found'}, 404  # Not found
+            abort(
+                404,
+                message='Interview not found'
+            )
         except ValueError as e:
-            return {'message': f'Serialization error: {str(e)}'}, 500  # Internal server error
+            abort(
+                500,
+                message=f'Serialization error: {str(e)}'
+            )
         except Exception as e:
             logging.error(f'Unexpected error in get interview (generic exception): {str(e)}')
-            return {'message': 'An unexpected error occurred'}, 500  # Internal server error
+            abort(
+                500,
+                message='An unexpected error occurred'
+            )
 
         try:
             db.session.delete(interview)
             db.session.commit()
         except DatabaseError as e:
-            return {'message': f'Error adding entry to the database: {str(e)}'}, 500  # Internal server error
+            abort(
+                500,
+                message=f'Error adding entry to the database: {str(e)}'
+            )
         except Exception as e:
             logging.error(f'Error adding entry to the database (generic exception): {str(e)}')
-            return {'message': f'Unexpected error adding entry to the database'}, 500  # Internal server error
+            abort(
+                500,
+                message=f'Unexpected error adding entry to the database'
+            )
 
-        return {'message': 'Interview deleted successfully'}, 200
+        return {'message': 'Interview deleted successfully'}

@@ -7,3 +7,5 @@ pip~=23.3.2
 wheel~=0.41.3
 Jinja2~=3.1.2
 setuptools~=69.0.2
+psutil~=5.9.7
+python-dotenv
