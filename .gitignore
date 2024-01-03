@@ -1,5 +1,7 @@
 *.idea
 __pycache__/*
 app/__pycache__/*
+app/resources/__pycache__/*
 debug.log
 # instance/*
+docker-commands.txt

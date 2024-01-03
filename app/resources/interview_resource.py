@@ -47,7 +47,7 @@ class InterviewResource(Resource):
             )
 
     @staticmethod
-    def put(interview_id):
+    def patch(interview_id):
         interview = Interview.query.get_or_404(interview_id)
         args = parser.parse_args(strict=False)
 

@@ -61,7 +61,7 @@ pip install -r requirements.txt
 - **GET /interviews:** Retrieve a list of all interviews.
 - **GET /interviews/{id}:** Get details of a specific interview.
 - **POST /interviews:** Create a new interview record.
-- **PUT /interviews/{id}:** Update an existing interview record.
+- **PATCH /interviews/{id}:** Update an existing interview record.
 - **DELETE /interviews/{id}:** Delete a specific interview record.
 
 ## Example Requests
@@ -117,7 +117,7 @@ curl http://localhost:5000/interviews/1
 **Request:**
 
 ```bash
-curl -X PUT http://localhost:5000/interviews/1 \
+curl -X PATCH http://localhost:5000/interviews/1 \
   -H "Content-Type: application/json" \
   -d '{
     "interview_duration_min": 60,
